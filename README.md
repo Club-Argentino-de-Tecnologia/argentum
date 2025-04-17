@@ -25,7 +25,7 @@ Esta blockchain utiliza un mecanismo híbrido de consenso (Clique PoA con adapta
 | Red | Chain ID | RPC URL | 
 |-----|----------|---------|
 | Producción | 54911 | https://rpc.argentum.clubartec.org |
-| Testnet | 54912 | https://test.rpc.argentum.clubartec.org |
+
 
 Para explorar bloques y transacciones, puedes usar [Blockscout](https://blockscout.com/) o [Expedition](https://expedition.dev/), configurando la URL de RPC de Argentum.
 
@@ -44,12 +44,6 @@ Para explorar bloques y transacciones, puedes usar [Blockscout](https://blocksco
 - **Símbolo de moneda**: CAT
 - **URL del explorador**: https://explorer.argentum.clubartec.org
 
-**Para Testnet:**
-- **Nombre de la red**: Argentum CAT Testnet
-- **URL de RPC**: https://test.rpc.argentum.clubartec.org
-- **ID de cadena**: 54912
-- **Símbolo de moneda**: tCAT
-- **URL del explorador**: https://test.explorer.argentum.clubartec.org
 
 ## 💻 Ejecutar un nodo
 

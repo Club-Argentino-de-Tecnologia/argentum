@@ -37,8 +37,8 @@ check_prerequisites() {
         exit 1
     fi
     
-    # Verificar Docker Compose (comprueba tanto la versión nueva como la legacy)
-    if ! (docker compose version &> /dev/null || command -v docker compose &> /dev/null); then
+    # Verificar Docker Compose
+    if ! command -v docker compose &> /dev/null; then
         print_error "Docker Compose no está instalado. Por favor, instálalo antes de continuar."
         print_message "Puedes instalarlo siguiendo las instrucciones en: https://docs.docker.com/compose/install/"
         exit 1
@@ -115,14 +115,17 @@ mkdir -p data config
 print_message "Configurando variables para entorno: $ENVIRONMENT"
 
 if [ "$ENVIRONMENT" = "production" ]; then
-    BOOTNODE="enode://b0cede2b69ca11bc9dd7be78ded8019e64ab618b380bc7b70c6007884bcf2e86dfebf6ba5e7a628d774e41114f7e3a75a9a9e087ce8f6160588b467e4487bc29@rpc.argentum.clubartec.org:30303"
+    BOOTNODE="enode://b0cede2b69ca11bc9dd7be78ded8019e64ab618b380bc7b70c6007884bcf2e86dfebf6ba5e7a628d774e41114f7e3a75a9a9e087ce8f6160588b467e4487bc29@98.81.94.105:30303"
     CHAIN_ID=54911
     NETWORK_NAME="Producción"
 else
-    BOOTNODE="enode://72e0a765862053d09ad292d56fa78365fe0814153be7e2246e8efd88b0ab9edd3cb9f67c1b9ce6bc6e4e989d3142852aae04340c368c47eb9afbd8b5e16c1de9@test.rpc.argentum.clubartec.org:30303"
+    BOOTNODE="enode://72e0a765862053d09ad292d56fa78365fe0814153be7e2246e8efd88b0ab9edd3cb9f67c1b9ce6bc6e4e989d3142852aae04340c368c47eb9afbd8b5e16c1de9@98.81.94.106:30303"
     CHAIN_ID=54912
     NETWORK_NAME="Testnet"
 fi
+
+# Nota informativa sobre uso de IPs en bootnodes
+print_message "IMPORTANTE: Geth requiere direcciones IP en los bootnodes, no nombres de dominio."
 
 # Obtener IP pública
 print_message "Obteniendo IP pública..."
