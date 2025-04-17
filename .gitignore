@@ -1,0 +1,35 @@
+# Directorios de datos y contraseñas
+data/
+config/password.txt
+
+# Archivos de entorno
+.env
+
+# Backups
+*_backup*/
+*.tar.gz
+*.backup
+
+# Logs
+logs/
+*.log
+
+# Directorios y archivos del sistema
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Archivos temporales
+tmp/
+temp/
+*.tmp
+
+# Archivos de Node.js si decides incluir una interfaz web en el futuro
+node_modules/
+npm-debug.log
+
+# Archivos de dependencias para otras herramientas
+vendor/
