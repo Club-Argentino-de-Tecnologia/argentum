@@ -32,7 +32,6 @@ services:
       --syncmode=full
       --nat=extip:\${NODE_IP}
       --miner.gasprice=0
-      --miner.gastarget=8000000
       --miner.gaslimit=30000000
       --mine
     logging:
@@ -40,3 +39,4 @@ services:
       options:
         max-size: "200m"
         max-file: "10"
+EOL
