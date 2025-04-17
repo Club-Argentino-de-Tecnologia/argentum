@@ -20,12 +20,12 @@ services:
       --http.port=8545
       --http.corsdomain=*
       --http.vhosts=*
-      --http.api=eth,net,web3,txpool,clique,miner
+      --http.api=eth,net,web3,txpool,clique,miner,personal
       --ws
       --ws.addr=0.0.0.0
       --ws.port=8546
       --ws.origins=*
-      --ws.api=eth,net,web3,txpool,clique,miner
+      --ws.api=eth,net,web3,txpool,clique,miner,personal
       --authrpc.addr=0.0.0.0
       --authrpc.port=8551
       --authrpc.vhosts=*
