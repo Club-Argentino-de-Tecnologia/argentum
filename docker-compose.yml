@@ -37,9 +37,9 @@ services:
       --miner.etherbase=0xc51A179f7000D89e3D4d7C0000C991ffdcb57cB8
       --unlock=0xc51A179f7000D89e3D4d7C0000C991ffdcb57cB8
       --password=/config/password.txt
+      --allow-insecure-unlock
     logging:
       driver: "json-file"
       options:
         max-size: "200m"
         max-file: "10"
-EOL
