@@ -1,58 +1,45 @@
-version: '3.8' # Puedes usar una versión más reciente de compose si quieres
-
+version: '3'
 services:
   geth:
-    # 1. USA UNA IMAGEN v1.13.x ESPECÍFICA
-    image: ethereum/client-go:v1.13.15
+    image: ethereum/client-go:v1.13.14
     container_name: argentum_node
     restart: always
     ports:
-      - "8545:8545"      # RPC HTTP
-      - "8546:8546"      # RPC WebSocket
-      - "30303:30303"    # P2P TCP
-      - "30303:30303/udp"# P2P UDP
+      - "8545:8545"  # RPC
+      - "8546:8546"  # WebSocket
+      - "30303:30303"  # P2P
+      - "30303:30303/udp"  # P2P UDP
     volumes:
-      - ./data:/data         # Directorio de datos de Geth
-      - ./config:/config     # Directorio para genesis.json y password.txt
-    environment:
-      # Define variables de entorno para flexibilidad
-      - CHAIN_ID=${CHAIN_ID:-54911}
-      - NODE_IP=${NODE_IP} # Asegúrate de setear esta variable externamente
-      - SIGNER_ADDRESS=0xc51A179f7000D89e3D4d7C0000C991ffdcb57cB8
-      - PASSWORD_FILE=/config/password.txt # Ruta al archivo de contraseña dentro del container
+      - ./data:/data
+      - ./config:/config
     command: >
       --datadir=/data
-      --networkid=${CHAIN_ID}
+      --networkid=\${CHAIN_ID}
       --http
       --http.addr=0.0.0.0
       --http.port=8545
       --http.corsdomain=*
       --http.vhosts=*
-      --http.api=eth,net,web3,txpool,clique,miner,personal # APIs necesarias
+      --http.api=eth,net,web3,txpool,clique,miner,personal
       --ws
       --ws.addr=0.0.0.0
       --ws.port=8546
       --ws.origins=*
-      --ws.api=eth,net,web3,txpool,clique,miner,personal # APIs necesarias
+      --ws.api=eth,net,web3,txpool,clique,miner,personal
       --authrpc.addr=0.0.0.0
       --authrpc.port=8551
       --authrpc.vhosts=*
       --syncmode=full
-      --nat=extip:${NODE_IP}
-      # 2. QUITA EL FLAG --mine
-      # --mine
-      # 3. AÑADE EL DESBLOQUEO DE LA CUENTA SIGNER
-      --unlock=${SIGNER_ADDRESS}
-      --password=${PASSWORD_FILE}
-      # OJO: Si es solo para desarrollo LOCAL y seguro, podrías usar:
-      # --allow-insecure-unlock --unlock=${SIGNER_ADDRESS}
-      # 4. AÑADE etherbase (buena práctica)
-      --miner.etherbase=${SIGNER_ADDRESS}
-      # --miner.gasprice=0 # Opcional en PoA
-      # --miner.gaslimit=30000000 # Ya definido en genesis
-      --verbosity=3 # Nivel de log (3 es info, 4 debug)
+      --nat=extip:\${NODE_IP}
+      --miner.gasprice=1
+      --miner.gaslimit=30000000
+      --mine
+      --miner.etherbase=0xc51A179f7000D89e3D4d7C0000C991ffdcb57cB8
+      --unlock=0xc51A179f7000D89e3D4d7C0000C991ffdcb57cB8
+      --password=/config/password.txt
     logging:
       driver: "json-file"
       options:
         max-size: "200m"
         max-file: "10"
+EOL
