@@ -1,7 +1,7 @@
 version: '3'
 services:
   geth:
-    image: ethereum/client-go:v1.13.14
+    image: ethereum/client-go:v1.10.26
     container_name: argentum_node
     restart: always
     ports:
@@ -20,17 +20,19 @@ services:
       --http.port=8545
       --http.corsdomain=*
       --http.vhosts=*
-      --http.api=eth,net,web3,txpool,clique
+      --http.api=eth,net,web3,txpool,clique,admin,debug,miner
       --ws
       --ws.addr=0.0.0.0
       --ws.port=8546
       --ws.origins=*
-      --ws.api=eth,net,web3,txpool,clique
-      --authrpc.addr=0.0.0.0
-      --authrpc.port=8551
-      --authrpc.vhosts=*
+      --ws.api=eth,net,web3,txpool,clique,admin,debug,miner
+      --port=30303
       --syncmode=full
+      --miner.etherbase=${ETHERBASE:-0xc51A179f7000D89e3D4d7C0000C991ffdcb57cB8}
+      --mine
+      --miner.gasprice=1
       --nat=extip:${NODE_IP}
+      --allow-insecure-unlock
     logging:
       driver: "json-file"
       options:
