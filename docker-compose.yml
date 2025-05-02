@@ -1,7 +1,7 @@
 version: '3'
 services:
   geth:
-    image: ethereum/client-go:v1.10.26
+    image: ethereum/client-go:v1.10.11-stable
     container_name: argentum_node
     restart: always
     ports:
